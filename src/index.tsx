@@ -1,7 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import {HashRouter as Router,Route} from "react-router-dom";
-import { EventListContainer } from "./components/event_list_container";
+import {Route} from "react-router";
+import {HashRouter as Router} from "react-router-dom"
+import {EventListContainer} from "./components/event_list_container";
 import {Navigation} from "./components/navigation";
 
 class App extends React.Component<{},{}>{
