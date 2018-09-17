@@ -2,32 +2,33 @@ import * as React from "react";
 import {EventBookingForm} from "./event_booking_form";
 import {Event} from "../models/event";
 
-export class EventBookingFormContainerProps{
-    eventID:string;
-    eventServiceURL:string;
-    bookingServiceURL:string;
+export interface EventBookingFormContainerProps {
+    eventID: string;
+    eventServiceURL: string;
+    bookingServiceURL: string;
 }
 
-export class EventBookingFormContainerState{
+export interface EventBookingFormState {
     state: "loading"|"ready"|"saving"|"done"|"error";
-    event?:Event;
+    event?: Event;
 }
 
-export class EventBookingFormContainer extends React.Component<EventBookingFormContainerProps,EventBookingFormContainerState> {
-    constructor(p:EventBookingFormContainerProps){
+export class EventBookingFormContainer extends React.Component<EventBookingFormContainerProps, EventBookingFormState> {
+    constructor(p: EventBookingFormContainerProps) {
         super(p);
+
         this.state = {
             state: "loading"
         };
 
-        fetch(p.eventServiceURL + "/events" + p.eventID)
-        .then<Event>(response => response.json())
-        .then(event => {
-            this.setState({
-                state: "ready",
-                event: event
-            });
-        })
+        fetch(p.eventServiceURL + "/events/" + p.eventID)
+            .then<Event>(resp => resp.json())
+            .then(event => {
+                this.setState({
+                    state: "ready",
+                    event: event
+                });
+            })
     }
 
     render() {
